@@ -182,7 +182,7 @@ butil::Status BackupMeta::Finish() {
     backup_meta_ = std::make_shared<dingodb::pb::common::BackupMeta>();
   }
 
-  backup_meta_->set_remark("backup sdk meta and sql meta. save dingodb::pb::common::BackupDataFileValueSstMetaGroup. ");
+  backup_meta_->set_remark("backup sdk meta and sql meta. save dingodb::pb::common::BackupMeta. ");
   backup_meta_->set_exec_node(dingodb::Constant::kBackupRegionName);
   backup_meta_->set_dir_name("");
   backup_meta_->set_file_size(sst->GetSize());
@@ -206,7 +206,7 @@ std::shared_ptr<dingodb::pb::common::BackupMeta> BackupMeta::GetBackupMeta() { r
 
 std::pair<butil::Status, std::shared_ptr<dingodb::pb::meta::IdEpochTypeAndValue>> BackupMeta::GetIdEpochTypeAndValue() {
   butil::Status status;
-  status = GetPresentIdsFromCoordinator();
+  status = GetPresentIdsFromMeta();
   if (!status.ok()) {
     DINGO_LOG(ERROR) << status.error_cstr();
     return {status, nullptr};
@@ -224,7 +224,7 @@ std::pair<butil::Status, std::shared_ptr<dingodb::pb::meta::TableIncrementGroup>
   return {butil::Status::OK(), table_increment_group_};
 }
 
-butil::Status BackupMeta::GetPresentIdsFromCoordinator() {
+butil::Status BackupMeta::GetPresentIdsFromMeta() {
   dingodb::pb::meta::SaveIdEpochTypeRequest request;
   dingodb::pb::meta::SaveIdEpochTypeResponse response;
 

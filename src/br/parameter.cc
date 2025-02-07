@@ -52,4 +52,19 @@ DEFINE_bool(br_log_switch_backup_detail_detail, false, "backup detail detail log
 
 DEFINE_string(br_log_dir, "./log", "backup log dir. default ./log");
 
+DEFINE_string(br_restore_type, "full", "restore  type. default: full.");
+
+DEFINE_bool(br_log_switch_restore_detail, true, "restore detail log");
+
+DEFINE_bool(br_log_switch_restore_detail_detail, false, "restore detail detail log");
+
+// restore watch interval in seconds. default 5s
+DEFINE_uint32(restore_watch_interval_s, 5, "restore watch interval in seconds. default 5s");
+
+// restore task timeout in seconds. default 100s
+DEFINE_uint32(restore_task_timeout_s, 100, "restore task timeout in seconds. default 100s");
+
+// restore task max retry times. default 5
+DEFINE_uint32(restore_task_max_retry, 5, "restore task max retry times. default 5");
+
 }  // namespace br
